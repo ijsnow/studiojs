@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import WaveStream from './WaveStream';
-
+import WaveStream from '../../../react-wave-stream/dist';
 import Recorder from '../../../recorder/lib/Recorder';
 
 class App extends Component {
@@ -14,7 +13,7 @@ class App extends Component {
       blob: null,
       isRecording: false,
       stream: null,
-      analyserData: {list: [], lineTo: 0},
+      analyserData: {data: [], lineTo: 0},
     };
 
     this.start = this.start.bind(this);
@@ -27,7 +26,7 @@ class App extends Component {
       onAnalysed: data => this.setState({analyserData: data}),
     });
 
-    navigator.mediaDevices.getUserMedia({audio:true})
+    navigator.mediaDevices.getUserMedia({audio: true})
       .then((stream) => {
         this.setState({stream});
         this.recorder.init(stream);

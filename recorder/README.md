@@ -19,6 +19,7 @@ const audioContext =  new (window.AudioContext || window.webkitAudioContext)();
 const recorder = new Recorder(audioContext, {
   // An array of 255 Numbers
   // You can use this to visualize the audio stream
+  // If you use react, check out react-wave-stream
   onAnalysed: data => console.log(data),
 });
 

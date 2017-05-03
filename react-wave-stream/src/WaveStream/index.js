@@ -28,13 +28,23 @@ class WaveStream extends Component {
     );
   }
 
-  getData() {
-    return this.props.list;
-  }
-
   render() {
-    const data = this.getData();
-    const {lineTo, list} = this.props;
+    const {data, backgroundColor, stroke} = this.props;
+    let lineTo = this.props.lineTo;
+
+    if (!lineTo) {
+      lineTo = findLastNonZero(data);
+    }
+
+    const pathStyle = {
+      ...styles.path,
+      stroke,
+    };
+
+    const svgStyle = {
+      ...styles.svg,
+      backgroundColor,
+    };
 
     return (
       <svg
@@ -42,28 +52,28 @@ class WaveStream extends Component {
         ref={(ref) => { this.visualizer = ref; }}
         viewBox="0 0 255 255"
         preserveAspectRatio="none"
-        style={styles.svg}
+        style={svgStyle}
       >
         <path
           style={{...styles.path, ...styles.white, ...styles.hr}}
           d={`M 0, ${255 / 2} l 255, 0`}
         />
-        {list.map((datum, idx) => (!this.shouldDraw(idx, datum) ? null : (
+        {data.map((datum, idx) => (!this.shouldDraw(idx, datum) ? null : (
           <path
             key={idx}
-            style={styles.path}
+            style={pathStyle}
             d={`M ${idx},${255 / 2} l 0,-${datum / 2}`}
           />
         )))}
-        {list.map((datum, idx) => (!this.shouldDraw(idx, datum) ? null : (
+        {data.map((datum, idx) => (!this.shouldDraw(idx, datum) ? null : (
           <path
             key={idx}
-            style={styles.path}
+            style={pathStyle}
             d={`M ${idx},${255 / 2} l 0,${datum / 2}`}
           />
         )))}
         <path
-          style={{...styles.path, ...styles.hr}}
+          style={{...pathStyle, ...styles.hr}}
           d={`M 0, ${255 / 2} l ${lineTo}, 0`}
         />
       </svg>
@@ -75,12 +85,16 @@ WaveStream.propTypes = {
   lineTo: PropTypes.number,
   data: PropTypes.arrayOf(PropTypes.number).isRequired,
   drawOffset: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  stroke: PropTypes.string,
 };
 
 WaveStream.defaultProps = {
   drawOffset: 12,
   data: [],
   lineTo: 255,
+  backgroundColor: '#555',
+  stroke: '#fff',
 };
 
 export default WaveStream;

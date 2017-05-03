@@ -1,7 +1,7 @@
 {
   "name": "recorder-js",
   "version": "1.0.0",
-  "description": "Produce universal library with webpack and es6",
+  "description": "Record audio in your browser",
   "main": "lib/Recorder.js",
   "scripts": {
     "build": "webpack --env build",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krasimir/webpack-library-starter.git"
+    "url": "https://github.com/ijsnow/studiojs.git"
   },
   "author": "Isaac Snow",
   "license": "MIT",

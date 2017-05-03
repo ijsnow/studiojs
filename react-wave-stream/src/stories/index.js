@@ -12,7 +12,7 @@ function getRandomInt(min, max) {
 function generateRandomData() {
   return new Array(255)
     .fill(1)
-    .map(d => getRandomInt(0, 100));
+    .map(() => getRandomInt(0, 100));
 }
 
 class WaveStreamStory extends Component {
@@ -41,6 +41,7 @@ class WaveStreamStory extends Component {
       <div style={{border: '1px solid red'}}>
         <WaveStream
           data={this.state.data}
+          lineTo={255}
         />
       </div>
     );

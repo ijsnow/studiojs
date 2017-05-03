@@ -1,10 +1,10 @@
 {
-  "name": "react-wave-stre",
+  "name": "react-wave-stream",
   "version": "0.0.0",
-  "description": "React Wave Stream Component",
+  "description": "Visualize frequency data from an audio input stream",
   "repository": {
     "type": "git",
-    "url": "https://github.com/you/repo.git"
+    "url": "https://github.com/ijsnow/studiojs.git"
   },
   "license": "MIT",
   "scripts": {
@@ -14,7 +14,7 @@
     "testonly": "mocha --require .scripts/mocha_runner src/**/tests/**/*.js",
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js",
-    "storybook": "start-storybook -p 9010",
+    "dev": "start-storybook -p 9010",
     "publish-storybook": "bash .scripts/publish_storybook.sh"
   },
   "devDependencies": {

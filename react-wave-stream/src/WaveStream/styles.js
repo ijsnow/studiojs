@@ -8,12 +8,10 @@ const styles = {
 
     maxHeight: '100%',
     maxWidth: '100%',
-    backgroundColor: '#fedcdc',
   },
 
   path: {
     strokeLinecap: 'square',
-    stroke: '#ff7d7d',
     strokeWidth: 0.75,
   },
 

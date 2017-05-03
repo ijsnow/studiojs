@@ -1,1 +1,1 @@
-export {default} from './WaveCanvas';
+export {default} from './WaveStream';

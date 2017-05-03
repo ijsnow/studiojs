@@ -92,7 +92,7 @@ class Recorder {
         data[idx] = datum;
       }
 
-      this.config.onAnalysed({list: data, lineTo: lastNonZero});
+      this.config.onAnalysed({data, lineTo: lastNonZero});
     }
   }
 }
