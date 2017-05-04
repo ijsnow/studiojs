@@ -1,9 +1,10 @@
 {
   "name": "recorder-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Record audio in your browser",
   "main": "lib/Recorder.js",
   "scripts": {
+    "prepublish": "webpack --env build",
     "build": "webpack --env build",
     "dev": "webpack --progress --colors --watch --env dev",
     "dev:serve": "cd example && ../node_modules/.bin/webpack-dev-server --open --port 5000 --host localhost"
