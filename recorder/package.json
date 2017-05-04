@@ -1,16 +1,17 @@
 {
   "name": "recorder-js",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Record audio in your browser",
-  "main": "lib/Recorder.js",
+  "main": "lib/index.js",
   "scripts": {
-    "prepublish": "webpack --env build",
+    "prepublish": "rm -rf lib/ && ./node_modules/.bin/babel src/ -d lib/",
     "build": "webpack --env build",
     "dev": "webpack --progress --colors --watch --env dev",
     "dev:serve": "cd example && ../node_modules/.bin/webpack-dev-server --open --port 5000 --host localhost"
   },
   "devDependencies": {
     "babel": "6.5.2",
+    "babel-cli": "^6.24.1",
     "babel-core": "6.22.1",
     "babel-eslint": "7.1.1",
     "babel-loader": "6.2.10",
