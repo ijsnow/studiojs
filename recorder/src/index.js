@@ -23,27 +23,31 @@ class Recorder {
   }
 
   init(stream) {
-    this.inputPoint = this.audioContext.createGain();
+    return new Promise((resolve) => {
+      this.inputPoint = this.audioContext.createGain();
 
-    this.stream = stream;
+      this.stream = stream;
 
-    this.realAudioInput = this.audioContext.createMediaStreamSource(stream);
-    this.audioInput = this.realAudioInput;
-    this.audioInput.connect(this.inputPoint);
+      this.realAudioInput = this.audioContext.createMediaStreamSource(stream);
+      this.audioInput = this.realAudioInput;
+      this.audioInput.connect(this.inputPoint);
 
-    this.analyserNode = this.audioContext.createAnalyser();
-    this.analyserNode.fftSize = 2048;
-    this.inputPoint.connect(this.analyserNode);
+      this.analyserNode = this.audioContext.createAnalyser();
+      this.analyserNode.fftSize = 2048;
+      this.inputPoint.connect(this.analyserNode);
 
-    this.audioRecorder = new Microphone(this.inputPoint);
+      this.audioRecorder = new Microphone(this.inputPoint);
 
-    const zeroGain = this.audioContext.createGain();
-    zeroGain.gain.value = 0.0;
+      const zeroGain = this.audioContext.createGain();
+      zeroGain.gain.value = 0.0;
 
-    this.inputPoint.connect(zeroGain);
-    zeroGain.connect(this.audioContext.destination);
+      this.inputPoint.connect(zeroGain);
+      zeroGain.connect(this.audioContext.destination);
 
-    this.updateAnalysers();
+      this.updateAnalysers();
+
+      resolve();
+    });
   }
 
   start() {
@@ -94,6 +98,10 @@ class Recorder {
 
       this.config.onAnalysed({data, lineTo: lastNonZero});
     }
+  }
+
+  setOnAnalysed(handler) {
+    this.config.onAnalysed = handler;
   }
 }
 
