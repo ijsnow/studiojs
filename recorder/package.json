@@ -1,8 +1,8 @@
 {
   "name": "recorder-js",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "Record audio in your browser",
-  "main": "lib/index.js",
+  "main": "index.js",
   "scripts": {
     "prepublish": "rm -rf lib/ && ./node_modules/.bin/babel src/ -d lib/",
     "build": "webpack --env build",
