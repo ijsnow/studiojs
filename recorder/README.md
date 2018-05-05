@@ -32,7 +32,7 @@ navigator.mediaDevices.getUserMedia({audio: true})
 
 function startRecording() {
   recorder.start()
-    .then(() => isRecording = true));
+    .then(() => isRecording = true);
 }
 
 function stopRecording() {
@@ -41,7 +41,7 @@ function stopRecording() {
       blob = blob;
 
       // buffer is an AudioBuffer
-    }));
+    });
 }
 
 function download() {
