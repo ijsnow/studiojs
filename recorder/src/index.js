@@ -5,6 +5,8 @@ const defaultConfig = {
   onAnalysed: null,
 };
 
+const microphoneConfigOptions = ['bufferLen', 'numChannels', 'mimeType'];
+
 class Recorder {
   constructor(audioContext, config = {}) {
     this.config = Object.assign({}, defaultConfig, config);
@@ -18,6 +20,13 @@ class Recorder {
     this.analyserContext = null;
     this.recIndex = 0;
     this.stream = null;
+
+    this.microphoneConfig = microphoneConfigOptions.reduce((a, c) => {
+      if (config[c]) {
+        a[c] = config[c];
+      }
+      return a;
+    }, {});
 
     this.updateAnalysers = this.updateAnalysers.bind(this);
   }
@@ -36,7 +45,7 @@ class Recorder {
       this.analyserNode.fftSize = 2048;
       this.inputPoint.connect(this.analyserNode);
 
-      this.audioRecorder = new Microphone(this.inputPoint);
+      this.audioRecorder = new Microphone(this.inputPoint, this.microphoneConfig);
 
       const zeroGain = this.audioContext.createGain();
       zeroGain.gain.value = 0.0;
